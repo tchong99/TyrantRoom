@@ -25,7 +25,7 @@ public class MoveTo : MonoBehaviour
         float followerSpeed = velocity.magnitude;
         //print(velocity.magnitude);
 
-        followerAnim.SetFloat("animspeed", followerSpeed);
+        followerAnim.SetFloat("animspeed", (followerSpeed * 0.2f) + 1.0f);
         print(followerAnim.GetFloat("animspeed"));
         goal.position = (Camera.main.GetComponent<GlobalVariables>().getClickedLocation());
         agent.destination = goal.position;
