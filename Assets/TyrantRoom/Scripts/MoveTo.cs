@@ -14,6 +14,7 @@ public class MoveTo : MonoBehaviour
     {
         agent = GetComponent<NavMeshAgent>();
         lastPosition = transform.position;
+        agent.speed = Random.Range(7,15);
     }
 
     // Update is called once per frame

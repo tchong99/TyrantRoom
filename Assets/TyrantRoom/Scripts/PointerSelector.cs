@@ -62,8 +62,8 @@ public class PointerSelector : MonoBehaviour
                 print(Camera.main.GetComponent<GlobalVariables>().getClickedLocation());
 
 
-
-                Instantiate(hitEffect, this.transform.position, raycastangle);
+                //Create particle effect aligned towards wherever clicked
+                Instantiate(hitEffect, Camera.main.transform.position, raycastangle);
                 debugObject.rotation = Quaternion.Euler(-90 + raycastangle.eulerAngles.x, raycastangle.eulerAngles.y, raycastangle.eulerAngles.z);
             }
             else
