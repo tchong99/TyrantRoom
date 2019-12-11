@@ -1,9 +1,9 @@
 ﻿/**
  * Author:  Andrew Rudasics
+ * Modified by Timothy Chong
  * Created: 7.7.2019
  * 
- * Abstract class for selectable objects. All selectables should inherit from this
- * class and implement OnSelect
+ * Class for pointing and clicking on certain things using the mouse or the VRPointer
  * 
  **/
 
@@ -13,11 +13,14 @@ public class PointerSelector : MonoBehaviour
 {
     [SerializeField]
     private float castDistance = Mathf.Infinity;
-    private GameObject selected, hover;
     private bool targeting;
     public DebugUI dbui;
     //shows a trace in the scene window
     public bool showDebugTrace;
+    public ParticleSystem hitEffect;
+    public RaycastHit raycast;
+
+    public Transform debugObject;
 
     private int castMask;
 
@@ -41,7 +44,10 @@ public class PointerSelector : MonoBehaviour
 
         if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, castDistance))
         {
-            GameObject temp = hit.collider.gameObject;
+            //GameObject temp = hit.collider.gameObject;
+            Vector3 RaycastDirection = (hit.point - Camera.main.transform.position).normalized;
+            Quaternion raycastangle = Quaternion.LookRotation(RaycastDirection);
+            raycast = hit;
 
             // Selection Behavior
             if (mouseDown)
@@ -55,51 +61,26 @@ public class PointerSelector : MonoBehaviour
                 Camera.main.GetComponent<GlobalVariables>().setClickedLocation(hit.point);
                 print(Camera.main.GetComponent<GlobalVariables>().getClickedLocation());
 
-                // Deselect Currently Selected
-                //print("clicked");
-                //if (selected != null && temp != selected)
-                //    selected.GetComponent<Selectable>().OnDeselect();
-                //// Select hovered object
-                //selected = temp.GetComponent<Selectable>().OnSelect();
-                hover = selected;
-                //print(selected.ToString());
-                //dbui.SetSelected(selected);
+
+
+                Instantiate(hitEffect, this.transform.position, raycastangle);
+                debugObject.rotation = Quaternion.Euler(-90 + raycastangle.eulerAngles.x, raycastangle.eulerAngles.y, raycastangle.eulerAngles.z);
             }
             else
             {
-                //// Deselect old hover 
-                //if (hover != null && hover != temp && temp == selected)
-                //    hover.GetComponent<Selectable>().OnDeselect();
-                //// Set hover behavior
-                //else
-                //{
-                //    if (hover == null)
-                //        hover = temp;
 
-                //    // Hover on 
-                //    if (temp != hover && hover != selected && hover != null)
-                //        hover.GetComponent<Selectable>().OnDeselect();
-                //    hover = temp.GetComponent<Selectable>().OnHover();
-                //    //print(temp.ToString());
-                //}
             }
         }
         else
         {
-            if (mouseDown)
-            {
-                if (selected != null)
-                {
-                    selected.GetComponent<Selectable>().OnDeselect();
-                    selected = null;
-                }
-            }
 
-            //if (hover != null && hover != selected)
-            //{
-            //    hover.GetComponent<Selectable>().OnDeselect();
-            //    hover = null;
-            //}
         }
+        
     }
+    public RaycastHit getRaycastHit()
+    {
+        return raycast;
+    }
+
+
 }
