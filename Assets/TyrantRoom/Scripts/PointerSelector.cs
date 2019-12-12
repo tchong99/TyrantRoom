@@ -21,9 +21,13 @@ public class PointerSelector : MonoBehaviour
     public RaycastHit raycast;
 
     public Transform debugObject;
-
+    public GameObject globalVars;
     private int castMask;
 
+    public GameObject rightHand;
+
+
+    public bool doOnceLock = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -39,13 +43,15 @@ public class PointerSelector : MonoBehaviour
     {
         RaycastHit hit;
         bool mouseDown = Input.GetMouseButtonDown(0);
+        mouseDown = OVRInput.Get(OVRInput.Axis1D.PrimaryHandTrigger) > 0;
+        print(mouseDown);
 
-        
 
-        if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, castDistance))
+        //Camera.main.ScreenPointToRay(Input.mousePosition)
+        if (Physics.Raycast(rightHand.transform.position, rightHand.transform.forward, out hit, castDistance))
         {
             //GameObject temp = hit.collider.gameObject;
-            Vector3 RaycastDirection = (hit.point - Camera.main.transform.position).normalized;
+            Vector3 RaycastDirection = (hit.point - rightHand.transform.position).normalized;
             Quaternion raycastangle = Quaternion.LookRotation(RaycastDirection);
             raycast = hit;
 
@@ -57,18 +63,22 @@ public class PointerSelector : MonoBehaviour
                     Debug.DrawLine(Camera.main.transform.position, hit.point, Color.red, 0.5f);
                 }
 
-                //Set Location of the pointer
-                Camera.main.GetComponent<GlobalVariables>().setClickedLocation(hit.point);
-                print(Camera.main.GetComponent<GlobalVariables>().getClickedLocation());
+                if(!doOnceLock){
+                    doOnceLock = true;
+                    //Set Location of the pointer
+                    globalVars.GetComponent<GlobalVariables>().setClickedLocation(hit.point);
+                    print(globalVars.GetComponent<GlobalVariables>().getClickedLocation());
 
 
-                //Create particle effect aligned towards wherever clicked
-                Instantiate(hitEffect, Camera.main.transform.position, raycastangle);
-                debugObject.rotation = Quaternion.Euler(-90 + raycastangle.eulerAngles.x, raycastangle.eulerAngles.y, raycastangle.eulerAngles.z);
+                    //Create particle effect aligned towards wherever clicked
+                    Instantiate(hitEffect, rightHand.transform.position, raycastangle);
+                    debugObject.rotation = Quaternion.Euler(-90 + raycastangle.eulerAngles.x, raycastangle.eulerAngles.y, raycastangle.eulerAngles.z);
+                }
+                
             }
             else
             {
-
+                doOnceLock = false;
             }
         }
         else

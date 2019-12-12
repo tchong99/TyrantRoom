@@ -10,6 +10,7 @@ public class MoveTo : MonoBehaviour
     NavMeshAgent agent;
     Vector3 lastPosition;
     public Animator followerAnim;
+    public GameObject globalVars;
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -28,7 +29,7 @@ public class MoveTo : MonoBehaviour
 
         followerAnim.SetFloat("animspeed", (followerSpeed * 0.2f) + 1.0f);
         //print(followerAnim.GetFloat("animspeed"));
-        goal.position = (Camera.main.GetComponent<GlobalVariables>().getClickedLocation());
+        goal.position = (globalVars.GetComponent<GlobalVariables>().getClickedLocation());
         agent.destination = goal.position;
     }
 }

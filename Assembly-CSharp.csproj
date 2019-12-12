@@ -70,6 +70,7 @@
     <Compile Include="Assets\TyrantRoom\Scripts\Selectable.cs" />
     <Compile Include="Assets\TyrantRoom\Scripts\SelectableTile.cs" />
     <Compile Include="Assets\TyrantRoom\Scripts\SelectableTyrantPlayer.cs" />
+    <Compile Include="Assets\TyrantRoom\Scripts\SwitchHands.cs" />
     <Compile Include="Assets\Unitystuff\Oculus\AudioManager\Scenes\Scripts\TestScript.cs" />
     <Compile Include="Assets\Unitystuff\Oculus\AudioManager\Scripts\Audio\AmbienceEmitter.cs" />
     <Compile Include="Assets\Unitystuff\Oculus\AudioManager\Scripts\Audio\AudioManager.cs" />
