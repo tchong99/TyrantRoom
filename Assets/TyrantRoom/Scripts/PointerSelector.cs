@@ -25,6 +25,7 @@ public class PointerSelector : MonoBehaviour
     private int castMask;
 
     public GameObject rightHand;
+    public LineRenderer lineRenderer;
 
 
     public bool doOnceLock = false;
@@ -35,6 +36,7 @@ public class PointerSelector : MonoBehaviour
 
         //Change this for masking a layer
         castMask = 0;
+        lineRenderer = this.GetComponent<LineRenderer>();
         
     }
 
@@ -43,8 +45,8 @@ public class PointerSelector : MonoBehaviour
     {
         RaycastHit hit;
         bool mouseDown = Input.GetMouseButtonDown(0);
-        mouseDown = OVRInput.Get(OVRInput.Axis1D.PrimaryHandTrigger) > 0;
-        print(mouseDown);
+        mouseDown = OVRInput.Get(OVRInput.Axis1D.SecondaryHandTrigger) > 0;
+        //print(mouseDown);
 
 
         //Camera.main.ScreenPointToRay(Input.mousePosition)
@@ -55,12 +57,16 @@ public class PointerSelector : MonoBehaviour
             Quaternion raycastangle = Quaternion.LookRotation(RaycastDirection);
             raycast = hit;
 
+            //Set location of the line renderer
+            lineRenderer.SetPosition(0, rightHand.transform.position);
+            lineRenderer.SetPosition(1, hit.point);
+
             // Selection Behavior
             if (mouseDown)
             {
                 if (showDebugTrace)
                 {
-                    Debug.DrawLine(Camera.main.transform.position, hit.point, Color.red, 0.5f);
+                    Debug.DrawLine(rightHand.transform.position, hit.point, Color.red, 0.5f);
                 }
 
                 if(!doOnceLock){
@@ -68,7 +74,6 @@ public class PointerSelector : MonoBehaviour
                     //Set Location of the pointer
                     globalVars.GetComponent<GlobalVariables>().setClickedLocation(hit.point);
                     print(globalVars.GetComponent<GlobalVariables>().getClickedLocation());
-
 
                     //Create particle effect aligned towards wherever clicked
                     Instantiate(hitEffect, rightHand.transform.position, raycastangle);
@@ -79,11 +84,14 @@ public class PointerSelector : MonoBehaviour
             else
             {
                 doOnceLock = false;
+
+
             }
         }
         else
         {
-
+            lineRenderer.SetPosition(0, new Vector3(0,0));
+            lineRenderer.SetPosition(1, new Vector3(0,0));
         }
         
     }
