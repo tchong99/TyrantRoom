@@ -63,14 +63,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\DebugUI.cs" />
+    <Compile Include="Assets\TyrantRoom\Scripts\Door.cs" />
     <Compile Include="Assets\TyrantRoom\Scripts\GlobalVariables.cs" />
-    <Compile Include="Assets\TyrantRoom\Scripts\MoveTo.cs" />
-    <Compile Include="Assets\TyrantRoom\Scripts\PointerClick.cs" />
-    <Compile Include="Assets\TyrantRoom\Scripts\PointerSelector.cs" />
+    <Compile Include="Assets\TyrantRoom\Scripts\Key.cs" />
+    <Compile Include="Assets\TyrantRoom\Scripts\OGScripts\PointerSelector.cs" />
+    <Compile Include="Assets\TyrantRoom\Scripts\OGScripts\SelectableTile.cs" />
+    <Compile Include="Assets\TyrantRoom\Scripts\OGScripts\SelectableTyrantPlayer.cs" />
+    <Compile Include="Assets\TyrantRoom\Scripts\PointAndClick scripts\MoveTo.cs" />
+    <Compile Include="Assets\TyrantRoom\Scripts\PointAndClick scripts\PointerClick.cs" />
+    <Compile Include="Assets\TyrantRoom\Scripts\PointAndClick scripts\SwitchHands.cs" />
     <Compile Include="Assets\TyrantRoom\Scripts\Selectable.cs" />
-    <Compile Include="Assets\TyrantRoom\Scripts\SelectableTile.cs" />
-    <Compile Include="Assets\TyrantRoom\Scripts\SelectableTyrantPlayer.cs" />
-    <Compile Include="Assets\TyrantRoom\Scripts\SwitchHands.cs" />
     <Compile Include="Assets\Unitystuff\Oculus\AudioManager\Scenes\Scripts\TestScript.cs" />
     <Compile Include="Assets\Unitystuff\Oculus\AudioManager\Scripts\Audio\AmbienceEmitter.cs" />
     <Compile Include="Assets\Unitystuff\Oculus\AudioManager\Scripts\Audio\AudioManager.cs" />
