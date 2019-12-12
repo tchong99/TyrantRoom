@@ -66,11 +66,11 @@
     <Compile Include="Assets\TyrantRoom\Scripts\Door.cs" />
     <Compile Include="Assets\TyrantRoom\Scripts\GlobalVariables.cs" />
     <Compile Include="Assets\TyrantRoom\Scripts\Key.cs" />
-    <Compile Include="Assets\TyrantRoom\Scripts\OGScripts\PointerSelector.cs" />
+    <Compile Include="Assets\TyrantRoom\Scripts\OGScripts\PointerClick.cs" />
     <Compile Include="Assets\TyrantRoom\Scripts\OGScripts\SelectableTile.cs" />
     <Compile Include="Assets\TyrantRoom\Scripts\OGScripts\SelectableTyrantPlayer.cs" />
     <Compile Include="Assets\TyrantRoom\Scripts\PointAndClick scripts\MoveTo.cs" />
-    <Compile Include="Assets\TyrantRoom\Scripts\PointAndClick scripts\PointerClick.cs" />
+    <Compile Include="Assets\TyrantRoom\Scripts\PointAndClick scripts\PointerSelector.cs" />
     <Compile Include="Assets\TyrantRoom\Scripts\PointAndClick scripts\SwitchHands.cs" />
     <Compile Include="Assets\TyrantRoom\Scripts\Selectable.cs" />
     <Compile Include="Assets\Unitystuff\Oculus\AudioManager\Scenes\Scripts\TestScript.cs" />
